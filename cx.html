@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AIIMS B.Sc Nursing Mock Test - Section Wise</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #007bff;
+      margin-bottom: 0.5em;
+    }
+    h2.section-title {
+      border-bottom: 2px solid #007bff;
+      padding-bottom: 5px;
+      margin-top: 2em;
+      color: #004a99;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .question p {
+      font-weight: bold;
+    }
+    .options label {
+      display: block;
+      margin-left: 20px;
+      cursor: pointer;
+    }
+    .submit-btn {
+      display: block;
+      margin: 30px auto;
+      padding: 10px 25px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .result {
+      font-weight: bold;
+      text-align: left;
+      margin-top: 20px;
+      color: green;
+      white-space: pre-line;
+      max-height: 300px;
+      overflow-y: auto;
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+      font-family: monospace;
+    }
+    #timer {
+      font-size: 18px;
+      text-align: center;
+      color: red;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>AIIMS B.Sc Nursing Mock Test (100 Questions)</h1>
+    <div id="timer">Time Left: 60:00</div>
+    <form id="quiz-form"></form>
+    <button type="button" class="submit-btn" onclick="submitTest()">Submit Test</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    // questions array injected here (same as you provided)
+    const questions = [
+      // Biology
+      {section:"Biology", question: "Human blood group is an example of:", options: ["Dominance", "Multiple allelism", "Codominance", "All of these"], answer: 3},
+      {section:"Biology", question: "MOET is a method of:", options: ["Fish cultivation", "Birth control in humans", "Cloning in sheep", "Hybridization in cattle"], answer: 3},
+      {section:"Biology", question: "GAATTC is the recognition site of which enzyme?", options: ["Hind III", "EcoRI", "BamI", "HaeIII"], answer: 1},
+      {section:"Biology", question: "Which class of tissues seems to be the most primitive among all types of tissues?", options: ["Fibers", "Vessels", "Parenchyma", "Sieve tubes"], answer: 2},
+      {section:"Biology", question: "The sequence of DNA not translated is:", options: ["Introns", "Exons", "Cistrons", "Recons"], answer: 0},
+      {section:"Biology", question: "The gene that encodes for the BT protein specific to the cotton bollworm is:", options: ["CryIAC", "CryIIABC", "CryIIAC", "CryIIAB"], answer: 0},
+      {section:"Biology", question: "Ranikhet disease is caused by:", options: ["Bacteria", "Virus", "Fungus", "Parasite"], answer: 1},
+      {section:"Biology", question: "Mendel’s work remained unrecognized till 1900 due to all except:", options: ["His work could not be widely publicised", "His work was not supported with the required data", "He could not provide any proof for the existence of factors", "His concept of genes was not accepted by his contemporaries"], answer: 1},
+      {section:"Biology", question: "Which of the following is a method of cloning in sheep?", options: ["MOET", "IVF", "Somatic cell nuclear transfer", "Hybridization"], answer: 2},
+      {section:"Biology", question: "The first movement of the fetus is usually observed during which month?", options: ["First", "Second", "Third", "Fourth"], answer: 1},
+
+      // Chemistry
+      {section:"Chemistry", question: "Bell metal is an alloy of:", options: ["Cu, Zn, and Sn", "Cu and Sn", "Cu and Zn", "Sn and Zn"], answer: 1},
+      {section:"Chemistry", question: "Which of these has the highest packing efficiency?", options: ["SCC", "BCC", "FCC", "ECC"], answer: 2},
+      {section:"Chemistry", question: "Which of these is the correct IUPAC name?", options: ["Prop-2-ene", "Pentan-3-al", "Pentan-1-one", "Pentan-2-one"], answer: 3},
+      {section:"Chemistry", question: "Faraday’s first law of electricity states:", options: ["Mass is directly proportional to the quantity of electricity", "Mass is inversely proportional to the quantity of electricity", "Products obtained are proportional to their equivalent weights", "Products obtained are proportional to their molecular masses"], answer: 0},
+      {section:"Chemistry", question: "Boiling point ______ as a result of intramolecular H-bonding:", options: ["Increases", "Decreases", "Remains the same", "None"], answer: 1},
+      {section:"Chemistry", question: "The impurities associated with minerals used in metallurgy are called collectively:", options: ["Slag", "Gangue", "Flux", "Froth"], answer: 1},
+      {section:"Chemistry", question: "Calcination is used in metallurgy for the removal of:", options: ["Water and sulphide", "Water and H₂S", "Water and CO₂", "Water and CO"], answer: 2},
+      {section:"Chemistry", question: "If gas expands at constant temperature, then:", options: ["The number of molecules increases", "K.E. of the molecules increases", "K.E. of the molecules decreases", "K.E. of the molecules remains the same"], answer: 3},
+      {section:"Chemistry", question: "Which of the following statements is false?", options: ["Catalysts are selective", "Catalysts affect the equilibrium", "Catalysts affect the activation energy", "Catalysts affect the mechanism"], answer: 1},
+      {section:"Chemistry", question: "If KMnO₄ is reduced to oxalic acid in an acidic medium, then the oxidation number of Mn changes from:", options: ["4 to 2", "6 to 4", "7 to 2", "7 to 4"], answer: 2},
+
+      // Physics
+      {section:"Physics", question: "A thin rod of length f/3 lies along the axis of a concave mirror of focal length f. The length of the image is:", options: ["f", "1/2 f", "2f", "1/4 f"], answer: 3},
+      {section:"Physics", question: "The refractive index of diamond is 2.41. What is the minimum angle of incidence to get internally reflected in a diamond?", options: ["42°", "35°", "24.5°", "48.4°"], answer: 2},
+      {section:"Physics", question: "A plano-convex lens has a focal length of f = 20 cm. If its plane surface is silvered, then the new focal length will be:", options: ["20 cm", "5 cm", "10 cm", "25 cm"], answer: 2},
+      {section:"Physics", question: "For an angle of minimum deviation of a prism to be equal to its refracting angle, the prism must be made of a material whose refractive index is:", options: ["Lies between √2 and 1", "Lies between 2 and √2", "Is less than 1", "Is greater than 2"], answer: 1},
+      {section:"Physics", question: "In Young's double-slit experiment, the intensity is I at a point where the path difference is λ/6. If I₀ denotes the maximum intensity, then I/I₀ is equal to:", options: ["3/4", "1/√2", "√3/2", "2"], answer: 0},
+      {section:"Physics", question: "At two points P and Q on the screen in Young's double-slit experiment, waves from slits S1 and S2 have a path difference of 0 and λ/4, respectively; the ratio of intensities at P and Q will be:", options: ["3:2", "2:1", "1:2", "4:1"], answer: 1},
+      {section:"Physics", question: "Assuming a human pupil to have a radius of 0.25 cm and a comfortable viewing distance of 25 cm, the minimum separation between two objects that the human eye can resolve at a 500 nm wavelength is:", options: ["1 μm", "30 μm", "100 μm", "300 μm"], answer: 1},
+      {section:"Physics", question: "According to Einstein's photoelectric equation, the plot of the kinetic energy of the emitted photoelectrons from a metal versus the frequency of the incident radiation gives a straight line whose slope:", options: ["Depends on the nature of the metal used", "Depends on the intensity of the radiation", "Depends both on the intensity of the radiation and the metal used", "Is the same for all metals and independent of the intensity of the radiation"], answer: 3},
+      {section:"Physics", question: "The binding energy per nucleon in deuterium (1H2) and helium (2He4) atoms is 1.1 MeV and 7.0 MeV, respectively. If two deuterium atoms combine to form a single helium atom, then the energy released is:", options: ["13.9 MeV", "19.2 MeV", "23.6 MeV", "26.9 MeV"], answer: 2},
+      {section:"Physics", question: "A nuclear reactor in which uranium-235 is used as fuel uses 2 kg of uranium-235 in 30 days. The power output of the reactor will be:", options: ["43.5 MW", "58.5 MW", "69.6 MW", "73.1 MW"], answer:1},
+
+      // GK
+      {section:"General Knowledge", question: "In which state will the country’s first semiconductor fab be established?", options: ["Tamil Nadu", "Gujarat", "Haryana", "Uttarakhand"], answer: 1},
+      {section:"General Knowledge", question: "World Civil Defence Day is observed every year on:", options: ["27 February", "02 March", "28 February", "01 March"], answer:3},
+      {section:"General Knowledge", question: "Which of the following is the capital of India?", options: ["Mumbai", "New Delhi", "Kolkata", "Chennai"], answer:1},
+      {section:"General Knowledge", question: "The largest planet in our solar system is:", options: ["Earth", "Mars", "Jupiter", "Saturn"], answer: 2},
+      {section:"General Knowledge", question: "The currency of Japan is:", options: ["Yen", "Won", "Dollar", "Euro"], answer:0},
+      {section:"General Knowledge", question: "Which gas is known as laughing gas?", options: ["Nitrous oxide", "Carbon dioxide", "Methane", "Oxygen"], answer:0},
+      {section:"General Knowledge", question: "The Great Wall of China was primarily built for:", options: ["Trade", "Defense", "Tourism", "Agriculture"], answer:1},
+      {section:"General Knowledge", question: "The first man to walk on the moon was:", options: ["Yuri Gagarin", "Neil Armstrong", "Buzz Aldrin", "John Glenn"], answer:1},
+      {section:"General Knowledge", question: "Which is the longest river in the world?", options: ["Amazon", "Nile", "Yangtze", "Mississippi"], answer:1},
+      {section:"General Knowledge", question: "The capital of France is:", options: ["Berlin", "Madrid", "Paris", "Rome"], answer:2}
+    ];
+
+    let time = 60 * 60; // 60 minutes in seconds
+    const timerEl = document.getElementById("timer");
+    const formEl = document.getElementById("quiz-form");
+    const resultEl = document.getElementById("result");
+
+    function updateTimer() {
+      const minutes = Math.floor(time / 60);
+      const seconds = time % 60;
+      timerEl.textContent = `Time Left: ${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+      if (time <= 0) {
+        clearInterval(timerInterval);
+        submitTest();
+      }
+      time--;
+    }
+
+    const timerInterval = setInterval(updateTimer, 1000);
+
+    function renderQuestions() {
+      const sections = {};
+      questions.forEach((q, idx) => {
+        if (!sections[q.section]) sections[q.section] = [];
+        sections[q.section].push({ ...q, index: idx });
+      });
+
+      let questionCounter = 1;
+      for (const sectionName in sections) {
+        const h2 = document.createElement("h2");
+        h2.className = "section-title";
+        h2.textContent = sectionName;
+        formEl.appendChild(h2);
+
+        sections[sectionName].forEach((q) => {
+          const div = document.createElement("div");
+          div.className = "question";
+          div.innerHTML = `<p>${questionCounter++}. ${q.question}</p>` +
+            q.options.map((opt, j) =>
+              `<label class="options"><input type="radio" name="q${q.index}" value="${j}" /> ${opt}</label>`
+            ).join("");
+          formEl.appendChild(div);
+        });
+      }
+    }
+
+    function submitTest() {
+      clearInterval(timerInterval);
+      let score = 0;
+      let correct = 0, wrong = 0, unattempted = 0;
+
+      questions.forEach((q, idx) => {
+        const selected = document.querySelector(`input[name="q${idx}"]:checked`);
+        if (!selected) {
+          unattempted++;
+        } else if (parseInt(selected.value) === q.answer) {
+          correct++;
+          score += 1;
+        } else {
+          wrong++;
+          score -= 0.25;
+        }
+      });
+
+      resultEl.innerText = 
+        `Total Questions: ${questions.length}\n` +
+        `Correct Answers: ${correct}\n` +
+        `Wrong Answers: ${wrong}\n` +
+        `Unattempted: ${unattempted}\n` +
+        `Final Score: ${score.toFixed(2)} / ${questions.length}`;
+    }
+
+    renderQuestions();
+  </script>
+</body>
+</html>
